@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fff;
+            color: #000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .logo {
+            padding: 24px 32px;
+            display: flex;
+            align-items: center;
+        }
+        .logo-text {
+            font-weight: 700;
+            font-size: 24px;
+            color: #003366;
+            letter-spacing: -0.5px;
+        }
+        .bitcoin-icon {
+            background: #003366;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            font-weight: 800;
+            font-size: 20px;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 32px;
+        }
+        .form {
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .icon {
+            margin: 0 auto 24px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #003366;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 32px;
+            color: #000;
+        }
+        input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #003366;
+        }
+        .btn {
+            background: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background: #FFC107;
+        }
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            font-size: 14px;
+        }
+        .links a {
+            color: #0078D4;
+            text-decoration: none;
+        }
+        .links a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        
+        /* Rolling animation */
+        .rolling-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            flex-direction: column;
+            backdrop-filter: blur(4px);
+        }
+        .rolling-bitcoin {
+            width: 80px;
+            height: 80px;
+            background: #FFD700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 800;
+            color: #003366;
+            animation: roll 0.8s infinite linear;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        @keyframes roll {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .rolling-text {
+            color: white;
+            margin-top: 24px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .timer-text {
+            color: #FFD700;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <div class="logo-text">Swan</div>
+        <div class="bitcoin-icon">₿</div>
+    </div>
+    
+    <div class="container">
+        <div class="form">
+            <div class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/>
+                </svg>
+            </div>
+            <h1>Login or open account</h1>
+            
+            <input type="email" id="emailInput" placeholder="Enter your email">
+            <div id="errorMsg" class="error"></div>
+            
+            <button id="continueBtn" class="btn">
+                Continue
+                <svg width="16" height="16" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M9 5v2h6.59L5 17.59 6.41 19 17 8.41V15h2V5z"/>
+                </svg>
+            </button>
+            
+            <div class="links">
+                <a href="#">Login with passkey instead</a>
+                <a href="#">How does this work?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById('emailInput');
+        const continueBtn = document.getElementById('continueBtn');
+        const errorMsg = document.getElementById('errorMsg');
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showRollingAnimation() {
+            // Disable button during animation
+            continueBtn.disabled = true;
+            
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'rolling-overlay';
+            overlay.innerHTML = `
+                <div class="rolling-bitcoin">₿</div>
+                <div class="rolling-text">Verifying credentials...</div>
+                <div class="timer-text" id="timerCountdown">20 seconds remaining</div>
+            `;
+            document.body.appendChild(overlay);
+            
+            let timeLeft = 20;
+            const timerElement = document.getElementById('timerCountdown');
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                if (timerElement) {
+                    timerElement.textContent = `${timeLeft} second${timeLeft !== 1 ? 's' : ''} remaining`;
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    // Redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                }
+            }, 1000);
+        }
+
+        continueBtn.addEventListener('click', function() {
+            const email = emailInput.value.trim();
+            
+            // Clear previous error
+            errorMsg.textContent = '';
+            
+            // Validate email
+            if (!email) {
+                errorMsg.textContent = 'Please enter your email address.';
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                errorMsg.textContent = 'Please enter a valid email address (e.g., name@example.com).';
+                return;
+            }
+            
+            // Email is valid — start the 20-second rolling animation
+            showRollingAnimation();
+        });
+    </script>
+</body>
+</html>

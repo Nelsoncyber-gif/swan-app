@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #F5F7FA;
+            color: #000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+        .header {
+            padding: 16px 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 20px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        .frozen-banner {
+            background: #E6F0FA;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #003366;
+        }
+        .account-card {
+            background: white;
+            border-radius: 12px;
+            margin: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .account-type {
+            font-weight: 600;
+            font-size: 16px;
+            color: #003366;
+            text-transform: uppercase;
+        }
+        .badge {
+            background: #FF4D4D;
+            color: white;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .bitcoin-amount {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+        .dollar-amount {
+            font-size: 24px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .dollar-balance {
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+            margin-top: 16px;
+        }
+        .dollar-label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .dollar-value {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .more-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #0078D4;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 12px 0;
+        }
+        .more-link svg {
+            width: 16px;
+            height: 16px;
+            fill: #0078D4;
+        }
+        .vault-section {
+            background: #0A1A35;
+            color: white;
+            border-radius: 12px;
+            margin: 20px;
+            padding: 24px;
+        }
+        .vault-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .vault-subtitle {
+            font-size: 18px;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        .vault-btn {
+            background: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .vault-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: #000;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 16px 0;
+            background: white;
+            border-top: 1px solid #E0E0E0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #777;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #003366;
+        }
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        .nav-label {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Accounts</div>
+    
+    <div class="frozen-banner">
+        Your account has been frozen
+    </div>
+    
+    <div class="account-card">
+        <div class="account-header">
+            <div class="account-type">PERSONAL</div>
+            <div class="badge">Unavailable</div>
+        </div>
+        <div class="bitcoin-amount">₿0.111401</div>
+        <div class="dollar-amount">$8,200.00</div>
+        
+        <div class="dollar-balance">
+            <div class="dollar-label">DOLLAR BALANCE</div>
+            <div class="dollar-value">$8,200.43</div>
+        </div>
+        
+        <a href="#" class="more-link">
+            Find out more
+            <svg viewBox="0 0 24 24">
+                <path d="M9 5v2h6.59L5 17.59 6.41 19 17 8.41V15h2V5z"/>
+            </svg>
+        </a>
+    </div>
+    
+    <div class="vault-section">
+        <div class="vault-title">Safe and Sound</div>
+        <div class="vault-subtitle">Advanced Bitcoin security made simple</div>
+        
+        <button class="vault-btn">
+            Open a Swan Vault
+            <svg viewBox="0 0 24 24">
+                <path d="M9 5v2h6.59L5 17.59 6.41 19 17 8.41V15h2V5z"/>
+            </svg>
+        </button>
+    </div>
+    
+    <div class="nav-bar">
+        <a href="#" class="nav-item">
+            <div class="nav-icon">₿</div>
+            <div class="nav-label">Bitcoin</div>
+        </a>
+        <a href="#" class="nav-item active">
+            <div class="nav-icon">📁</div>
+            <div class="nav-label">Accounts</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">📚</div>
+            <div class="nav-label">Learn</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">👤</div>
+            <div class="nav-label">Profile</div>
+        </a>
+    </div>
+</body>
+</html>
