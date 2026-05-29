@@ -1,11 +1,5 @@
 {
   "build": {
-    "builder": "NIXPACKS"
-  },
-  "builders": [
-    {
-      "name": "Staticfile",
-      "uses": "staticfile"
-    }
-  ]
+    "builder": "STATICFILE"
+  }
 }
